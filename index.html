@@ -343,10 +343,16 @@
       }
 
       /* Experience Section */
+      #experience {
+        background: var(--bg-light);
+        position: relative;
+      }
+
       .timeline {
         position: relative;
         max-width: 900px;
         margin: 0 auto;
+        padding-left: 40px;
       }
 
       .timeline::before {
@@ -354,83 +360,101 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 50%;
+        left: 16px;
         width: 4px;
-        background: linear-gradient(var(--primary), var(--secondary));
-        transform: translateX(-50%);
+        background: linear-gradient(
+          to bottom,
+          var(--primary),
+          var(--secondary)
+        );
+        border-radius: 4px;
       }
 
       .timeline-item {
-        margin-bottom: 64px;
         position: relative;
+        margin-bottom: 48px;
       }
 
       .timeline-content {
-        width: calc(50% - 48px);
-        padding: 24px;
+        padding: 32px;
         background: var(--glass-bg);
         border-radius: 16px;
         backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
-      .timeline-item:nth-child(odd) .timeline-content {
-        left: 0;
-      }
-
-      .timeline-item:nth-child(even) .timeline-content {
-        left: calc(50% + 48px);
+      .timeline-content:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px var(--shadow);
       }
 
       .timeline-date {
-        position: absolute;
-        top: 16px;
-        padding: 8px 16px;
-        background: var(--primary);
+        display: inline-block;
+        padding: 8px 20px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
         color: var(--text-light);
         border-radius: 20px;
         font-size: 0.95rem;
-        font-weight: 500;
-      }
-
-      .timeline-item:nth-child(odd) .timeline-date {
-        right: -180px;
-      }
-
-      .timeline-item:nth-child(even) .timeline-date {
-        left: -180px;
+        font-weight: 600;
+        margin-bottom: 24px;
+        margin-top: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
 
       .timeline-dot {
         position: absolute;
-        top: 16px;
-        left: 50%;
+        top: 60px; /* Adjusted to align with content card */
+        left: 8px;
         width: 16px;
         height: 16px;
         background: var(--accent);
         border-radius: 50%;
-        transform: translateX(-50%);
         box-shadow: 0 0 0 4px var(--bg-light);
+        z-index: 1;
       }
 
       .timeline-title {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         color: var(--text-dark);
         margin-bottom: 12px;
+        font-weight: 700;
       }
 
       .timeline-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         color: var(--primary);
         font-style: italic;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
+        font-weight: 500;
       }
 
       .timeline-description ul {
-        padding-left: 20px;
+        padding-left: 24px;
       }
 
       .timeline-description li {
         margin-bottom: 12px;
+        font-size: 1.05rem;
+        color: var(--text-dark);
+      }
+
+      .timeline-description li::before {
+        content: "•";
+        color: var(--accent);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+
+      .timeline-description a {
+        color: var(--primary);
+        font-weight: 500;
+      }
+
+      .timeline-description a:hover {
+        color: var(--secondary);
       }
 
       /* Projects Section */
@@ -744,23 +768,16 @@
           grid-template-columns: 1fr;
         }
 
+        .timeline {
+          padding-left: 32px;
+        }
+
         .timeline::before {
-          left: 32px;
-        }
-
-        .timeline-content {
-          width: calc(100% - 80px);
-          left: 80px !important;
-        }
-
-        .timeline-date {
-          left: 0 !important;
-          right: auto !important;
-          top: -48px;
+          left: 8px;
         }
 
         .timeline-dot {
-          left: 32px;
+          left: 0;
         }
       }
 
@@ -796,6 +813,26 @@
         .certifications-container {
           grid-template-columns: 1fr;
         }
+
+        .timeline-content {
+          padding: 24px;
+        }
+
+        .timeline-title {
+          font-size: 1.4rem;
+        }
+
+        .timeline-subtitle {
+          font-size: 1.1rem;
+        }
+
+        .timeline-description li {
+          font-size: 1rem;
+        }
+
+        .timeline-dot {
+          top: 56px; /* Adjusted for mobile */
+        }
       }
 
       @media (max-width: 576px) {
@@ -805,6 +842,23 @@
 
         .section-title h2 {
           font-size: 2rem;
+        }
+
+        .timeline {
+          padding-left: 24px;
+        }
+
+        .timeline-content {
+          padding: 20px;
+        }
+
+        .timeline-date {
+          font-size: 0.9rem;
+          padding: 6px 16px;
+        }
+
+        .timeline-dot {
+          top: 52px; /* Adjusted for smaller screens */
         }
       }
 
@@ -987,9 +1041,10 @@
           <h2 data-gsap="fade-up">Work Experience</h2>
         </div>
         <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-content glass" data-gsap="fade-up">
-              <div class="timeline-title">Frontend Developer</div>
+          <div class="timeline-item" data-gsap="fade-up">
+            <div class="timeline-date">Jul 2023 - Present</div>
+            <div class="timeline-content glass">
+              <h3 class="timeline-title">Frontend Developer</h3>
               <div class="timeline-subtitle">
                 Ernst & Young (EY), Delhi, India
               </div>
@@ -999,42 +1054,39 @@
                     Developed scalable frontend architecture for
                     <a href="https://www.makro.pro/en" target="_blank"
                       >MAKRO E-commerce</a
-                    >, increasing engagement by 25%.
+                    >, increasing customer engagement by 25%.
                   </li>
                   <li>
-                    Optimized search with Elasticsearch, improving retention by
-                    15%.
+                    Optimized search functionality via Elasticsearch, resulting
+                    in a 15% uplift in user retention.
                   </li>
                   <li>
-                    Reduced load time by 40% using lazy loading and dynamic
-                    imports.
+                    Implemented lazy loading and dynamic imports to reduce
+                    initial load time by 40%.
                   </li>
                   <li>
-                    Built performant React components for
+                    Created performant React components for
                     <a href="https://www.dalmiacement.com" target="_blank"
                       >Dalmia Cement</a
-                    >, speeding up reports by 25%.
+                    >, accelerating report generation by 25%.
                   </li>
                   <li>
-                    Integrated REST APIs with Node.js and added Mixpanel
-                    analytics.
+                    Integrated REST APIs with Node.js backends and added
+                    Mixpanel analytics to enhance product insights.
                   </li>
                   <li>
-                    Collaborated in Agile sprints with cross-functional teams.
+                    Collaborated cross-functionally with designers and backend
+                    engineers in Agile sprints.
                   </li>
                 </ul>
               </div>
             </div>
-            <div class="timeline-date">Jul 2023 - Present</div>
             <div class="timeline-dot"></div>
           </div>
-          <div class="timeline-item">
-            <div
-              class="timeline-content glass"
-              data-gsap="fade-up"
-              data-delay="0.2"
-            >
-              <div class="timeline-title">Frontend Developer</div>
+          <div class="timeline-item" data-gsap="fade-up" data-delay="0.2">
+            <div class="timeline-date">Apr 2022 - Apr 2023</div>
+            <div class="timeline-content glass">
+              <h3 class="timeline-title">Frontend Developer</h3>
               <div class="timeline-subtitle">
                 <a href="https://www.trica.co/" target="_blank">Trica</a>,
                 Bengaluru, India
@@ -1042,24 +1094,25 @@
               <div class="timeline-description">
                 <ul>
                   <li>
-                    Led frontend revamp of Trica Investment Platform, boosting
-                    engagement by 30%.
+                    Led the frontend revamp of Trica Investment Platform,
+                    transforming Figma designs into responsive React.js
+                    interfaces, boosting engagement by 30%.
                   </li>
                   <li>
-                    Built reusable components with Redux and React Hooks,
+                    Built reusable components using Redux and React Hooks,
                     reducing dev time by 20%.
                   </li>
                   <li>
                     Improved responsiveness by 15% through optimized API
-                    integration.
+                    integration and performance fixes.
                   </li>
                   <li>
-                    Contributed to Agile ceremonies and maintained clean code.
+                    Contributed to weekly Agile ceremonies and maintained clean,
+                    modular code.
                   </li>
                 </ul>
               </div>
             </div>
-            <div class="timeline-date">Apr 2022 - Apr 2023</div>
             <div class="timeline-dot"></div>
           </div>
         </div>
@@ -1376,7 +1429,7 @@
         });
       });
 
-      // Contact Form Submission (Unchanged)
+      // Contact Form Submission
       const contactForm = document.getElementById("contactForm");
       const formMessage = document.getElementById("formMessage");
 
